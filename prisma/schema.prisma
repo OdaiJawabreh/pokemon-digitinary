@@ -51,46 +51,46 @@ model Pokemon {
 }
 
 enum Role {
-  ADMIN
-  MEMBER
+  admin
+  member
 }
 
 enum EvolutionStage {
-  Evolved
-  Lower
-  Zero
-  One
-  Two
-  Three
+  evolved
+  lower
+  zero
+  one
+  two
+  three
 }
 
 enum Type {
-  Grass
-  Fire
-  Water
-  Bug
-  Normal
-  Poison
-  Electric
-  Ground
-  Fairy
-  Fighting
-  Psychic
-  Rock
-  Ghost
-  Ice
-  Dragon
-  Dark
-  Steel
-  Flying
+  grass
+  fire
+  water
+  bug
+  normal
+  poison
+  electric
+  ground
+  fairy
+  fighting
+  psychic
+  rock
+  ghost
+  ice
+  dragon
+  dark
+  steel
+  flying
 }
 
 enum Weather {
-  SunnyClear
-  Rainy
-  PartlyCloudy
-  Cloudy
-  Windy
-  Fog
-  Snow
+  sunnyClear
+  rainy
+  partlyCloudy
+  cloudy
+  windy
+  fog
+  snow
 }
