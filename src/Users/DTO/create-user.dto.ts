@@ -1,4 +1,4 @@
-import { IsEmail, IsString, IsEnum, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsString, IsEnum, IsNotEmpty, MinLength, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {Role} from "../../Shared/enums"
 // Create a Data Transfer Object (DTO) for creating a user
@@ -32,7 +32,7 @@ export class CreateUserDto {
     enum: Role,
     description: 'Role of the user (ADMIN or MEMBER)',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Role)
   readonly role: Role;
 }

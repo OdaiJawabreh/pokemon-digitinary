@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export enum Role {
-    ADMIN = 'admin',
-    MEMBER = 'member',
+    ADMIN = 'ADMIN',
+    MEMBER = 'MEMBER',
   }
 export enum EvolutionStage {
     LOWER = "zero",
@@ -32,11 +32,11 @@ export enum Type {
     flying = 'flying'
 }
 export enum Weather {
-    SUNNY_CLEAR = 'Sunny/clear',
-    RAINY = 'Rainy',
-    PARTLY_CLOUDY = 'Partly cloudy',
-    CLOUDY = 'Cloudy',
-    WINDY = 'Windy',
-    FOG = 'Fog',
-    SNOW = 'Snow',
+    SUNNY_CLEAR = 'sunny/clear',
+    RAINY = 'rainy',
+    PARTLY_CLOUDY = 'partly cloudy',
+    CLOUDY = 'cloudy',
+    WINDY = 'windy',
+    FOG = 'fog',
+    SNOW = 'snow',
 }

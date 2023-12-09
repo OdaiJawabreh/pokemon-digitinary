@@ -1,17 +1,9 @@
-import { IsEmail, IsString, IsEnum, IsOptional, MinLength, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsString, IsEnum, IsOptional, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '../../Shared/enums';
 
 // Define a DTO for updating user data with a PUT request
 export class UpdateUserDto {
-    @ApiProperty({
-        example: '8',
-        description: 'User Id ',
-      })
-      @IsEmail()
-      @IsNotEmpty()
-      readonly id: string;
-
     @ApiProperty({
         example: 'user@example.com',
         description: 'Email address for the user',
