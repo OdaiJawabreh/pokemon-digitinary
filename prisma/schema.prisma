@@ -1,0 +1,96 @@
+datasource db {  
+    provider = "mongodb"
+    url = env("DATABASE_URL")
+} 
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId  
+  email     String   @unique 
+  name      String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role?    @default(MEMBER)
+  password  String   
+}
+
+model Pokemon {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId  
+  name           String           
+  pokedexNumber  Int              
+  imgName        String           
+  generation     Int?             
+  evolutionStage EvolutionStage?
+  evolved        Boolean          @default(false)
+  familyId       Int?
+  crossGen       Boolean          @default(false) 
+  type1          Type             
+  type2          Type?
+  weather1       Weather          
+  weather2       Weather?
+  statTotal      Int              
+  atk            Int              
+  def            Int              
+  sta            Int              
+  legendary      Boolean          
+  aquireable     Boolean          
+  spawns         Boolean           @default(false)
+  regional       Boolean           @default(false)
+  raidable       Int?             @default(0)
+  hatchable      Int               @default(0)
+  shiny          Boolean           @default(false)
+  nest           Boolean           @default(false)
+  new            Boolean           @default(false)
+  notGettable    Boolean           @default(false)
+  futureEvolve   Boolean           @default(false)
+  cp40           Int              
+  cp39           Int              
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum EvolutionStage {
+  Evolved
+  Lower
+  Zero
+  One
+  Two
+  Three
+}
+
+enum Type {
+  Grass
+  Fire
+  Water
+  Bug
+  Normal
+  Poison
+  Electric
+  Ground
+  Fairy
+  Fighting
+  Psychic
+  Rock
+  Ghost
+  Ice
+  Dragon
+  Dark
+  Steel
+  Flying
+}
+
+enum Weather {
+  SunnyClear
+  Rainy
+  PartlyCloudy
+  Cloudy
+  Windy
+  Fog
+  Snow
+}
