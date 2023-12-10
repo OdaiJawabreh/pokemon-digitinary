@@ -23,7 +23,7 @@ model Pokemon {
   pokedexNumber  Int              
   imgName        String           
   generation     Int?             
-  evolutionStage EvolutionStage?
+  evolutionStage String?
   evolved        Boolean          @default(false)
   familyId       Int?
   crossGen       Boolean          @default(false) 
@@ -53,15 +53,6 @@ model Pokemon {
 enum Role {
   ADMIN
   MEMBER
-}
-
-enum EvolutionStage {
-  LOWER
-  FIRST
-  SECOND
-  THIRD
-  EVOLVED
-  LOWERCASE
 }
 
 enum Type {

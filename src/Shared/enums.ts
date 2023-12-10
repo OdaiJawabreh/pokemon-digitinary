@@ -3,14 +3,6 @@ export enum Role {
   ADMIN = 'ADMIN',
   MEMBER = 'MEMBER',
 }
-export enum EvolutionStage {
-  LOWER = 0,
-  FIRST = 1,
-  SECOND = 2,
-  THIRD = 3,
-  EVOLVED = 'Evolved',
-  LOWERCASE = 'Lower',
-}
 export enum Type {
   GRASS = 'grass',
   FIRE = 'fire',

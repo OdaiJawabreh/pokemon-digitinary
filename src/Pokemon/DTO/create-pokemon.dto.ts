@@ -6,7 +6,7 @@ import {
   IsEnum,
   IsOptional,
 } from 'class-validator';
-import { EvolutionStage, Weather, Type } from '../../Shared/enums';
+import {  Weather, Type } from '../../Shared/enums';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePokemonDto {
@@ -56,8 +56,12 @@ export class CreatePokemonDto {
   generation: number;
 
   @IsOptional()
-  @IsEnum(EvolutionStage)
-  evolutionStage: EvolutionStage;
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'evolution Stage of the Pokémon',
+    example: 'Lower',
+  })
+  evolutionStage: String;
 
   @IsOptional()
   @IsBoolean({
@@ -76,7 +80,7 @@ export class CreatePokemonDto {
     description: 'Family ID',
     example: 13,
   })
-  familyID?: number;
+  familyId?: number;
   @IsBoolean({
     message: 'the crossGen should be a boolean',
   })
@@ -288,7 +292,7 @@ export class CreatePokemonDto {
     description: 'CP at level 40',
     example: 900,
   })
-  cpAt40: number;
+  cp40: number;
 
   @IsNotEmpty({
     message: 'the cpAt39 cannot be empty',
@@ -300,5 +304,5 @@ export class CreatePokemonDto {
     description: 'CP at level 39',
     example: 900,
   })
-  cpAt39: number;
+  cp39: number;
 }
