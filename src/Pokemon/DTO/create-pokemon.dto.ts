@@ -41,9 +41,6 @@ export class CreatePokemonDto {
     example: 'pikachu.png',
   })
   imgName: string;
-  @IsNotEmpty({
-    message: 'the generation cannot be empty',
-  })
   @IsInt({
     message: 'the generation should be a number',
   })
