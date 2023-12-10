@@ -3,10 +3,8 @@ import {
   IsNotEmpty,
   IsInt,
   IsBoolean,
-  IsEnum,
   IsOptional,
 } from 'class-validator';
-import { EvolutionStage, Weather, Type } from '../../Shared/enums';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePokemonDto {
@@ -43,9 +41,6 @@ export class CreatePokemonDto {
     example: 'pikachu.png',
   })
   imgName: string;
-  @IsNotEmpty({
-    message: 'the generation cannot be empty',
-  })
   @IsInt({
     message: 'the generation should be a number',
   })
@@ -56,8 +51,12 @@ export class CreatePokemonDto {
   generation: number;
 
   @IsOptional()
-  @IsEnum(EvolutionStage)
-  evolutionStage: EvolutionStage;
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'evolution Stage of the Pokémon',
+    example: 'Lower',
+  })
+  evolutionStage: String;
 
   @IsOptional()
   @IsBoolean({
@@ -76,7 +75,7 @@ export class CreatePokemonDto {
     description: 'Family ID',
     example: 13,
   })
-  familyID?: number;
+  familyId?: number;
   @IsBoolean({
     message: 'the crossGen should be a boolean',
   })
@@ -86,37 +85,33 @@ export class CreatePokemonDto {
   })
   crossGen?: boolean;
 
-  @IsEnum(Type)
   @IsNotEmpty()
   @ApiProperty({
     description: 'Type 1',
     example: 'Electric',
   })
-  type1: Type;
+  type1: String;
 
   @IsOptional()
-  @IsEnum(Type)
   @ApiProperty({
     description: 'Type 2',
     example: 'None',
   })
-  type2: Type;
+  type2: String;
 
-  @IsEnum(Weather)
   @IsNotEmpty()
   @ApiProperty({
     description: 'Weather 1',
     example: 'Clear',
   })
-  weather1: Weather;
+  weather1: String;
 
   @IsOptional()
-  @IsEnum(Weather)
   @ApiProperty({
     description: 'Weather 2',
     example: 'Fog',
   })
-  weather2: Weather;
+  weather2: String;
 
   @IsNotEmpty()
   @IsInt({
@@ -288,7 +283,7 @@ export class CreatePokemonDto {
     description: 'CP at level 40',
     example: 900,
   })
-  cpAt40: number;
+  cp40: number;
 
   @IsNotEmpty({
     message: 'the cpAt39 cannot be empty',
@@ -300,5 +295,5 @@ export class CreatePokemonDto {
     description: 'CP at level 39',
     example: 900,
   })
-  cpAt39: number;
+  cp39: number;
 }

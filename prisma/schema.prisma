@@ -23,14 +23,14 @@ model Pokemon {
   pokedexNumber  Int              
   imgName        String           
   generation     Int?             
-  evolutionStage EvolutionStage?
+  evolutionStage String?
   evolved        Boolean          @default(false)
   familyId       Int?
   crossGen       Boolean          @default(false) 
-  type1          Type             
-  type2          Type?
-  weather1       Weather          
-  weather2       Weather?
+  type1          String             
+  type2          String?
+  weather1       String          
+  weather2       String?
   statTotal      Int              
   atk            Int              
   def            Int              
@@ -53,44 +53,4 @@ model Pokemon {
 enum Role {
   ADMIN
   MEMBER
-}
-
-enum EvolutionStage {
-  LOWER
-  FIRST
-  SECOND
-  THIRD
-  EVOLVED
-  LOWERCASE
-}
-
-enum Type {
-  GRASS
-  FIRE
-  WATER
-  BUG
-  NORMAL
-  POISON
-  ELECTRIC
-  GROUND
-  FAIRY
-  FIGHTING
-  PSYCHIC
-  ROCK
-  GHOST
-  ICE
-  DRAGON
-  DARK
-  STEEL
-  flying
-}
-
-enum Weather {
-  SUNNY_CLEAR
-  RAINY
-  PARTLY_CLOUDY
-  CLOUDY
-  WINDY
-  FOG
-  SNOW
 }
