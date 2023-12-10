@@ -7,18 +7,32 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../PrismaService';
 import { CreateUserDto } from './DTO/create-user.dto';
-import { User } from '@prisma/client';
+import {  User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './DTO/update-user.dto';
 import { ObjectId } from 'mongodb';
+import {Role} from "../Shared/enums"
 
 @Injectable()
 export class UserService implements OnModuleInit {
   constructor(private readonly prismaService: PrismaService) {}
-  onModuleInit() {
-    console.log('Hello Ots me ');
-    // throw new Error('Method not implemented.');
-  }
+  async onModuleInit() {
+    // Check if an admin user  exists
+    const adminUserExists = await this.checkAdminExists();
+
+    // If no admin user exists, create one
+    if (!adminUserExists) {
+        const adminUserDto = {
+            email: 'odai@pokemon.go',
+            name: 'odai',
+            role: Role.ADMIN,
+            password: 'odai-pokemongo',
+        };
+
+        // Create the admin user
+        await this.create(adminUserDto);
+    }
+}
 
   async findAll() {
     try {
@@ -103,4 +117,10 @@ export class UserService implements OnModuleInit {
       where: { email },
     });
   }
+  async checkAdminExists(): Promise<User | null> {
+    const adminUser = await this.prismaService.user.findUnique({
+        where: { email: 'odai@pokemon.go' },
+    });
+    return adminUser;
+}
 }
