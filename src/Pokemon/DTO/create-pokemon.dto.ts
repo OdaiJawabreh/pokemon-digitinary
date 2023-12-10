@@ -3,10 +3,8 @@ import {
   IsNotEmpty,
   IsInt,
   IsBoolean,
-  IsEnum,
   IsOptional,
 } from 'class-validator';
-import {  Weather, Type } from '../../Shared/enums';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePokemonDto {
@@ -90,37 +88,33 @@ export class CreatePokemonDto {
   })
   crossGen?: boolean;
 
-  @IsEnum(Type)
   @IsNotEmpty()
   @ApiProperty({
     description: 'Type 1',
     example: 'Electric',
   })
-  type1: Type;
+  type1: String;
 
   @IsOptional()
-  @IsEnum(Type)
   @ApiProperty({
     description: 'Type 2',
     example: 'None',
   })
-  type2: Type;
+  type2: String;
 
-  @IsEnum(Weather)
   @IsNotEmpty()
   @ApiProperty({
     description: 'Weather 1',
     example: 'Clear',
   })
-  weather1: Weather;
+  weather1: String;
 
   @IsOptional()
-  @IsEnum(Weather)
   @ApiProperty({
     description: 'Weather 2',
     example: 'Fog',
   })
-  weather2: Weather;
+  weather2: String;
 
   @IsNotEmpty()
   @IsInt({
