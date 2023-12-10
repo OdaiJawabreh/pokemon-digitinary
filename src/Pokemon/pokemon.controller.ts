@@ -1,18 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-  Query,
-  UseGuards,
-  UseInterceptors,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { AuthJwtGuard } from '../auth/guard/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -26,7 +12,7 @@ export class PokemonController {
 
   @Post('import')
   @UseGuards(new RoleGuard('ADMIN'))
-  async importPokemonData() {
+  async importPokemonData(): Promise<{ count: number; message: string }> {
     return await this.pokemonService.importFromExcel();
   }
 }
