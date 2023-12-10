@@ -83,11 +83,24 @@ export class UserService implements OnModuleInit {
   }
   async delete(userId: string): Promise<User> {
     try {
-      return await this.prismaService.user.delete({
+      const deletedUser = await this.prismaService.user.delete({
         where: { id: userId },
       });
+
+      if (!deletedUser) throw new BadRequestException('Invalid user ID format');
+      return deletedUser;
     } catch (error) {
+      // check if the id have format of objectId
+      const isValidObjectId = ObjectId.isValid(userId);
+      if (!isValidObjectId) {
+        throw new BadRequestException('Invalid user ID format');
+      }
       throw new InternalServerErrorException('Internal Server Error');
     }
+  }
+  async findUserByEmail(email: string): Promise<User> {
+    return this.prismaService.user.findUnique({
+      where: { email },
+    });
   }
 }
