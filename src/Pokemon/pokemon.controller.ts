@@ -6,6 +6,7 @@ import { RoleGuard } from 'src/auth/guard/auth.role';
 import { CreatePokemonDto } from './DTO/create-pokemon.dto';
 import { Pokemon } from '@prisma/client';
 import { UpdatePokemonDTO } from './DTO/update-pokemon.dto';
+import { FilterPokemonDTO } from './DTO/filter-pokemon.dto';
 
 @Controller('pokemon')
 @ApiBearerAuth()
@@ -35,4 +36,12 @@ export class PokemonController {
   ): Promise<Pokemon> {
     return await this.pokemonService.updatePokemon(pokemonDTO, id);
   }
+  // i desided to be filter on 4 coulnms name podexNumer and eveloved and this will support paggination
+  @Post('filter')
+  async getPokemons (@Body() filterPokemonDTO: FilterPokemonDTO): Promise<{ total: number;  data: Pokemon[]; }> {
+
+      return await this.pokemonService.filterPokemons(filterPokemonDTO)
+
+  }
+
 }

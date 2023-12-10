@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import { PrismaService } from '../PrismaService';
 import { Pokemon } from '@prisma/client';
 import { UpdatePokemonDTO } from './DTO/update-pokemon.dto';
+import { FilterPokemonDTO } from './DTO/filter-pokemon.dto';
 @Injectable()
 export class PokemonService {
   constructor(private prismaService: PrismaService) {}
@@ -45,7 +46,6 @@ export class PokemonService {
       return newPokemon;
     } catch (error) {
       throw new BadRequestException('Error in createNewPokemon:', error);
-
     }
   }
   async updatePokemon(pokemonDTO: any, id: any): Promise<Pokemon> {
@@ -63,17 +63,61 @@ export class PokemonService {
       });
 
       return updatedpokemon;
- 
     } catch (error) {
-      throw new BadRequestException('Error updatePokemon :', error);    }
+      throw new BadRequestException('Error updatePokemon :', error);
+    }
   }
-  async getNewTotal(existingPokemon: any, atk: any, def:any , sta: any): Promise<number> {
+  async getNewTotal(
+    existingPokemon: any,
+    atk: any,
+    def: any,
+    sta: any,
+  ): Promise<number> {
     const newatk = atk !== undefined ? atk : existingPokemon.atk;
     const newdef = def !== undefined ? def : existingPokemon.def;
     const newsta = sta !== undefined ? sta : existingPokemon.sta;
-  
+
     return newatk + newdef + newsta;
   }
+  async filterPokemons(
+    filterDTO: FilterPokemonDTO,
+  ): Promise<{ total: number; data: Pokemon[] }> {
+    const { name, pokedexNumberFrom, pokedexNumberTo, evolved, page, perPage } =
+      filterDTO;
+
+    const filter: any = {
+      name: {
+        contains: name, 
+        mode: 'insensitive',
+      },
+      pokedexNumber: {
+        gte: pokedexNumberFrom,
+        lte: pokedexNumberTo,
+      },
+      evolved,
+    };
+
+    const pagination: any =
+      page !== undefined && perPage !== undefined
+        ? {
+            skip: (page - 1) * perPage,
+            take: perPage,
+          }
+        : undefined;
+
+    const [pokemons, total] = await Promise.all([
+      this.prismaService.pokemon.findMany({
+        where: filter,
+        ...pagination,
+      }),
+      this.prismaService.pokemon.count({
+        where: filter,
+      }),
+    ]);
+
+    return { total, data: pokemons };
+  }
+
   convertExcelData(data: any) {
     return data.map((item: any) => {
       return {
