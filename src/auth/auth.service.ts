@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   private generateToken(userData: User): string {
-    return sign({ userData }, 'your-access-token-secret', {
+    return sign( userData , 'your-access-token-secret', {
       expiresIn: '10d',
     })
   }

@@ -4,8 +4,10 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './DTO/create-user.dto';
 import {  UpdateUserDto } from './DTO/update-user.dto';
+import { AuthJwtGuard } from '../auth/guard/auth.guard';
 
 @Controller('user')
+@UseGuards(AuthJwtGuard)
 @ApiBearerAuth()
 export class UserController {
   constructor(private readonly userService: UserService) { }
