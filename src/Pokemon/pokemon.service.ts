@@ -29,6 +29,23 @@ export class PokemonService {
       throw new BadRequestException('Error importing data from Excel:', error);
     }
   }
+  async createNewPokemon (createPokemonDto: any ) : Promise<Pokemon> {
+    try {
+      let { statTotal, atk, def, sta } = createPokemonDto;
+
+      // Calculate statTotal if it's not provided
+      if (statTotal === undefined) statTotal = atk + def + sta;
+
+      // Update pokemonDTO with the calculated statTotal
+      createPokemonDto = { ...createPokemonDto, statTotal };
+
+      const newPokemon = await this.prismaService.pokemon.create({data:createPokemonDto}) ;
+      return newPokemon
+    } catch (error) {
+      console.error('Error createNewPokemon:', error);
+      throw error;
+    }
+  }
   convertExcelData(data: any) {
     return data.map((item: any) => {
       return {
