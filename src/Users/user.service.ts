@@ -90,4 +90,9 @@ export class UserService implements OnModuleInit {
       throw new InternalServerErrorException('Internal Server Error');
     }
   }
+  async findUserByEmail(email: string): Promise<User> {
+    return this.prismaService.user.findUnique({
+        where: { email },
+    });
+}
 }
