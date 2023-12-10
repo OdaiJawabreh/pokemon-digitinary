@@ -56,41 +56,41 @@ enum Role {
 }
 
 enum EvolutionStage {
-  evolved
-  lower
-  zero
-  one
-  two
-  three
+  LOWER
+  FIRST
+  SECOND
+  THIRD
+  EVOLVED
+  LOWERCASE
 }
 
 enum Type {
-  grass
-  fire
-  water
-  bug
-  normal
-  poison
-  electric
-  ground
-  fairy
-  fighting
-  psychic
-  rock
-  ghost
-  ice
-  dragon
-  dark
-  steel
+  GRASS
+  FIRE
+  WATER
+  BUG
+  NORMAL
+  POISON
+  ELECTRIC
+  GROUND
+  FAIRY
+  FIGHTING
+  PSYCHIC
+  ROCK
+  GHOST
+  ICE
+  DRAGON
+  DARK
+  STEEL
   flying
 }
 
 enum Weather {
-  sunnyClear
-  rainy
-  partlyCloudy
-  cloudy
-  windy
-  fog
-  snow
+  SUNNY_CLEAR
+  RAINY
+  PARTLY_CLOUDY
+  CLOUDY
+  WINDY
+  FOG
+  SNOW
 }
