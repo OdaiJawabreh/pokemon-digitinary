@@ -9,7 +9,7 @@ import {
 import { EvolutionStage, Weather, Type } from '../../Shared/enums';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Pokemon {
+export class CreatePokemonDto {
   @IsNotEmpty({
     message: 'the name cannot be empty',
   })
@@ -65,7 +65,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Evolved Pokémon ',
-    example: 'true/false',
+    example: true,
   })
   evolved?: boolean;
   @IsOptional()
@@ -82,7 +82,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Cross Generation',
-    example: 'true/false',
+    example: true,
   })
   crossGen?: boolean;
 
@@ -172,7 +172,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Legendary status',
-    example: "true/false",
+    example: false,
   })
   legendary: boolean;
 
@@ -184,7 +184,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Aquireable status',
-    example: "true/false",
+    example: false,
   })
   aquireable: boolean;
 
@@ -194,7 +194,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Spawns status',
-    example: "true/false",
+    example: false,
   })
   spawns: boolean;
 
@@ -204,7 +204,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Regional status',
-    example: "true/false",
+    example: false,
   })
   regional: boolean;
 
@@ -234,7 +234,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Shiny status',
-    example: "true/false",
+    example: false,
   })
   shiny: boolean;
 
@@ -244,7 +244,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Nest status',
-    example: "true/false",
+    example: false,
   })
   nest: boolean;
 
@@ -254,7 +254,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'New status',
-    example: "true/false",
+    example: false,
   })
   new: boolean;
 
@@ -264,7 +264,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Not Gettable status',
-    example: "true/false",
+    example: false,
   })
   notGettable: boolean;
 
@@ -274,7 +274,7 @@ export class Pokemon {
   })
   @ApiProperty({
     description: 'Future Evolution status',
-    example: "true/false",
+    example: false,
   })
   futureEvolve: boolean;
 
