@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   OnApplicationBootstrap,
 } from '@nestjs/common';
@@ -27,7 +28,7 @@ export class PokemonService {
       return { count, message: 'Data Uloaded Sucssfuly' };
     } catch (error) {
       console.error('Error importing data from Excel:', error);
-      throw new BadRequestException('Error importing data from Excel:', error);
+      throw new InternalServerErrorException('Error importing data from Excel:', error);
     }
   }
   async createNewPokemon(createPokemonDto: any): Promise<Pokemon> {
@@ -45,7 +46,7 @@ export class PokemonService {
       });
       return newPokemon;
     } catch (error) {
-      throw new BadRequestException('Error in createNewPokemon:', error);
+      throw new InternalServerErrorException('Error in createNewPokemon:', error);
     }
   }
   async updatePokemon(pokemonDTO: any, id: any): Promise<Pokemon> {
@@ -64,7 +65,7 @@ export class PokemonService {
 
       return updatedpokemon;
     } catch (error) {
-      throw new BadRequestException('Error updatePokemon :', error);
+      throw new InternalServerErrorException('Error updatePokemon :', error);
     }
   }
   async getNewTotal(
@@ -105,6 +106,7 @@ export class PokemonService {
           }
         : undefined;
 
+   try {
     const [pokemons, total] = await Promise.all([
       this.prismaService.pokemon.findMany({
         where: filter,
@@ -116,6 +118,30 @@ export class PokemonService {
     ]);
 
     return { total, data: pokemons };
+   } catch (error) {
+    throw new InternalServerErrorException('Error filterPokemons :', error);
+
+   }
+  }
+  async deletePokemon(id: string): Promise<{pokemon: Pokemon, message: string}> {
+    try {
+      const existingPokemon = await this.prismaService.pokemon.findUnique({
+        where: { id },
+      });
+
+      if (!existingPokemon) {
+        // Handle the case where the document was not found
+        throw new NotFoundException(`Pokemon with ID ${id} not found`);
+      }
+
+      await this.prismaService.pokemon.delete({
+        where: { id },
+      });
+      return {pokemon:existingPokemon, message:"Deleted Succssfuly"}
+    } catch (error) {
+      console.error('Error deletePokemon:', error);
+      throw new InternalServerErrorException('Error deletePokemon :', error);
+    }
   }
 
   convertExcelData(data: any) {

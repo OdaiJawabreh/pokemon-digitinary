@@ -1,4 +1,12 @@
-import { Body, Controller, Param, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { AuthJwtGuard } from '../auth/guard/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -38,10 +46,15 @@ export class PokemonController {
   }
   // i desided to be filter on 4 coulnms name podexNumer and eveloved and this will support paggination
   @Post('filter')
-  async getPokemons (@Body() filterPokemonDTO: FilterPokemonDTO): Promise<{ total: number;  data: Pokemon[]; }> {
-
-      return await this.pokemonService.filterPokemons(filterPokemonDTO)
-
+  async getPokemons(
+    @Body() filterPokemonDTO: FilterPokemonDTO,
+  ): Promise<{ total: number; data: Pokemon[] }> {
+    return await this.pokemonService.filterPokemons(filterPokemonDTO);
   }
 
+  @Delete(':id')
+  @UseGuards(new RoleGuard({ role: 'ADMIN' }))
+  async deletePokemon(@Param('id') id: string): Promise<{pokemon: Pokemon, message: string}> {
+    return  this.pokemonService.deletePokemon(id);
+  }
 }
