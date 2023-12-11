@@ -61,11 +61,11 @@ export class UserService implements OnModuleInit {
     }
   }
   async updateUser(
-    userId: string,
+    id: string,
     updateUserDto: UpdateUserDto,
   ): Promise<User> {
     // check if the id have format of objectId
-    const isValidObjectId = ObjectId.isValid(userId);
+    const isValidObjectId = ObjectId.isValid(id);
 
     if (!isValidObjectId) {
       throw new BadRequestException('Invalid user ID format');
@@ -75,18 +75,18 @@ export class UserService implements OnModuleInit {
       // get the user and check if exist or not
       const user = await this.prismaService.user.findUnique({
         where: {
-          id: userId,
+          id,
         },
       });
 
       if (!user) {
         // Handle the case where the user is not found, throw an error or return as needed
-        throw new NotFoundException(`User with ID ${userId} not found`);
+        throw new NotFoundException(`User with ID ${id} not found`);
       }
       // Update the user data
 
       const updatedUser = await this.prismaService.user.update({
-        where: { id: userId },
+        where: { id },
         data: { ...updateUserDto },
       });
 
@@ -95,17 +95,17 @@ export class UserService implements OnModuleInit {
       throw new InternalServerErrorException('Internal Server Error');
     }
   }
-  async delete(userId: string): Promise<User> {
+  async delete(id: string): Promise<User> {
     try {
       const deletedUser = await this.prismaService.user.delete({
-        where: { id: userId },
+        where: { id },
       });
 
       if (!deletedUser) throw new BadRequestException('Invalid user ID format');
       return deletedUser;
     } catch (error) {
       // check if the id have format of objectId
-      const isValidObjectId = ObjectId.isValid(userId);
+      const isValidObjectId = ObjectId.isValid(id);
       if (!isValidObjectId) {
         throw new BadRequestException('Invalid user ID format');
       }

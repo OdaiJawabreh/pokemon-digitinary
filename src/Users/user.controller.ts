@@ -33,18 +33,18 @@ export class UserController {
   }
   @Put(':id')
   async updateUser(
-    @Param('id') userId: string,
+    @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
     const updatedUser = await this.userService.updateUser(
-      userId,
+      id,
       updateUserDto,
     );
     return updatedUser;
   }
   @Delete(':id')
   @UseGuards(new RoleGuard('ADMIN'))
-  delete(@Param('id') userId: string): Promise<User> {
-    return this.userService.delete(userId);
+  delete(@Param('id') id: string): Promise<User> {
+    return this.userService.delete(id);
   }
 }

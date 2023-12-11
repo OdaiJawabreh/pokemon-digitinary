@@ -10,7 +10,7 @@ export class UpdateUserDto {
       })
       @IsEmail()
       @IsOptional()
-      readonly email: string;
+      readonly email?: string;
     
       @ApiProperty({
         example: 'John Doe',
@@ -18,7 +18,7 @@ export class UpdateUserDto {
       })
       @IsOptional()
       @IsString()
-      readonly name: string;
+      readonly name?: string;
     
       @ApiProperty({
         example: 'password', 
@@ -27,7 +27,7 @@ export class UpdateUserDto {
       @IsOptional()
       @IsString()
       @MinLength(7)
-      readonly password: string;
+      readonly password?: string;
     
       @ApiProperty({
         enum: Role,
@@ -35,5 +35,5 @@ export class UpdateUserDto {
       })
       @IsOptional()
       @IsEnum(Role)
-      readonly role: Role;
+      readonly role?: Role;
 }
