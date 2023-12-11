@@ -48,7 +48,7 @@ export class CreatePokemonDto {
     description: 'Generation of the Pokémon',
     example: 1,
   })
-  generation: number;
+  generation?: number;
 
   @IsOptional()
   @IsNotEmpty()
@@ -56,7 +56,7 @@ export class CreatePokemonDto {
     description: 'evolution Stage of the Pokémon',
     example: 'Lower',
   })
-  evolutionStage: String;
+  evolutionStage?: String;
 
   @IsOptional()
   @IsBoolean({
@@ -66,7 +66,7 @@ export class CreatePokemonDto {
     description: 'Evolved Pokémon ',
     example: true,
   })
-  evolved?: boolean;
+  evolved: boolean;
   @IsOptional()
   @IsInt({
     message: 'the familyID should be a number',
@@ -83,7 +83,7 @@ export class CreatePokemonDto {
     description: 'Cross Generation',
     example: true,
   })
-  crossGen?: boolean;
+  crossGen: boolean;
 
   @IsNotEmpty()
   @ApiProperty({
@@ -97,7 +97,7 @@ export class CreatePokemonDto {
     description: 'Type 2',
     example: 'None',
   })
-  type2: String;
+  type2?: String;
 
   @IsNotEmpty()
   @ApiProperty({
@@ -111,7 +111,7 @@ export class CreatePokemonDto {
     description: 'Weather 2',
     example: 'Fog',
   })
-  weather2: String;
+  weather2?: String;
 
   @IsNotEmpty()
   @IsInt({
@@ -211,7 +211,7 @@ export class CreatePokemonDto {
     description: 'Raidable status',
     example: 1,
   })
-  raidable: number;
+  raidable?: number;
 
   @IsOptional()
   @IsInt({

@@ -13,12 +13,12 @@ export class FilterPokemonDTO {
   @IsInt({
     message: 'the pokedexNumberFrom should be a number',
   })
-  pokedexNumberFrom: number;
+  pokedexNumberFrom?: number;
   @IsOptional()
   @IsInt({
     message: 'the pokedexNumberTo should be a number',
   })
-  pokedexNumberTo: number;
+  pokedexNumberTo?: number;
 
   @IsOptional()
   @IsBoolean({
@@ -31,12 +31,12 @@ export class FilterPokemonDTO {
     message: 'the page should be a number',
   })
   @Min(1, { message: 'The page should be a positive integer' })
-  page: number;
+  page?: number;
 
   @IsOptional()
   @IsInt({
     message: 'the perPage should be a number',
   })
   @Min(1, { message: 'The perPage should be a positive integer' })
-  perPage: number;
+  perPage?: number;
 }
