@@ -10,10 +10,12 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Connect with database
+RUN npx prisma generate
+
 # Build the Nest.js application
 RUN npm run build
 
-RUN npx prisma generate
 
 # Expose the port the app runs on
 EXPOSE 8080
